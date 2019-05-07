@@ -64,8 +64,8 @@ public class TwoNumbersDemo {
                 int twoaobj = (Integer) newMap.get(i);
 
                 int sum = (obj + hasNext + twoaobj);
-                int cur = sum % 10;
-                int next = sum / 10;
+                int cur = sum % 10;//当前的值
+                int next = sum / 10;//要将此值放入下一次计算中去
                 hasNext = next;
                 if (i < one.size() - 1) {
                     sb.append(cur).append("->");
