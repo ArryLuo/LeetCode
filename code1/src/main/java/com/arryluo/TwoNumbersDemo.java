@@ -24,9 +24,9 @@ public class TwoNumbersDemo {
         LinkedList linkedList2 = new LinkedList();
         linkedList2.add(5);
         linkedList2.add(6);
-        linkedList2.add(4);
-        linkedList2.add(5);
         linkedList2.add(6);
+        linkedList2.add(9);
+        linkedList2.add(9);
         //5-6-4-5 2-4-3;
         //7-0-8-5-6
         String res = twoNumber(linkedList1, linkedList2);
@@ -54,16 +54,7 @@ public class TwoNumbersDemo {
         for (int i = 0; i < one.size(); i++) {
             int obj = one.get(i);
             if (i > twoLine - 1) {
-                if (i < one.size() - 1) {
-                    sb.append(obj + hasNext).append("->");
-                } else {
-                    sb.append(obj + hasNext);
-                }
-
-            } else {
-                int twoaobj = (Integer) newMap.get(i);
-
-                int sum = (obj + hasNext + twoaobj);
+                int sum = (obj + hasNext);
                 int cur = sum % 10;//当前的值
                 int next = sum / 10;//要将此值放入下一次计算中去
                 hasNext = next;
@@ -73,10 +64,30 @@ public class TwoNumbersDemo {
                     sb.append(cur);
                 }
 
+            } else {
+                int twoaobj = (Integer) newMap.get(i);
+
+                int sum = (obj + hasNext + twoaobj);
+                int cur = sum % 10;//当前的值
+                int next = sum / 10;//要将此值放入下一次计算中去
+                hasNext = next;
+
+                if (i < one.size() - 1) {
+                    sb.append(cur).append("->");
+                } else {
+                    sb.append(cur);
+                }
+
             }
+        }
+        if (hasNext > 0) {
+            //考虑到极值时.
+            //9-9-9-9-9
+            sb.append("->").append(hasNext);
         }
         return sb.toString();
     }
+
 
     //处理第二个链表的数据集
     private static Map getTwoMap(LinkedList<Integer> two) {
